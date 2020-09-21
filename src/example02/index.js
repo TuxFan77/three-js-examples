@@ -29,4 +29,16 @@ const cube = new THREE.Mesh(geometry, material);
 
 scene.add(cube);
 
-renderer.render(scene, camera);
+function render(time) {
+  time /= 1000;
+
+  cube.rotation.x = time;
+  cube.rotation.y = time;
+  cube.rotation.z = time;
+
+  renderer.render(scene, camera);
+
+  requestAnimationFrame(render);
+}
+
+requestAnimationFrame(render);
