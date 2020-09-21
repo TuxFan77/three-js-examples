@@ -8,13 +8,14 @@ import * as THREE from "three";
 
 const canvas = document.querySelector("#main");
 const renderer = new THREE.WebGLRenderer({ canvas });
+renderer.setSize(window.innerWidth, window.innerHeight);
 
 const fov = 75;
-const aspect = 2;
+const aspect = window.innerWidth / window.innerHeight;
 const near = 0.1;
 const far = 5;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-camera.position.z = 2;
+camera.position.z = 3;
 
 const scene = new THREE.Scene();
 
@@ -29,18 +30,29 @@ const boxHeight = 1;
 const boxDepth = 1;
 const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
 
-const material = new THREE.MeshPhongMaterial({ color: 0x44aa88 });
+function makeInstance(geometry, color, x) {
+  const material = new THREE.MeshPhongMaterial({ color });
+  const cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
+  cube.position.x = x;
+  return cube;
+}
 
-const cube = new THREE.Mesh(geometry, material);
-
-scene.add(cube);
+const cubes = [
+  makeInstance(geometry, 0x44aa88, 0),
+  makeInstance(geometry, 0x8844aa, 2),
+  makeInstance(geometry, 0xaa8844, -2),
+];
 
 function render(time) {
   time /= 1000;
 
-  cube.rotation.x = time;
-  cube.rotation.y = time;
-  cube.rotation.z = time;
+  cubes.forEach((cube, index) => {
+    const speed = 1 + index * 0.1;
+    const rotation = time * speed;
+    cube.rotation.x = rotation;
+    cube.rotation.y = rotation;
+  });
 
   renderer.render(scene, camera);
 
