@@ -8,10 +8,9 @@ import * as THREE from "three";
 
 const canvas = document.querySelector("#main");
 const renderer = new THREE.WebGLRenderer({ canvas });
-renderer.setSize(window.innerWidth, window.innerHeight);
 
 const fov = 75;
-const aspect = window.innerWidth / window.innerHeight;
+const aspect = 2;
 const near = 0.1;
 const far = 5;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
