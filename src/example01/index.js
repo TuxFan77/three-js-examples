@@ -1,3 +1,8 @@
+/*
+ * Tutorial from:
+ * https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene
+ */
+
 import "../threejs.scss";
 import * as THREE from "three";
 
