@@ -10,7 +10,7 @@ const canvas = document.querySelector("#main");
 const renderer = new THREE.WebGLRenderer({ canvas });
 
 const fov = 75;
-const aspect = 2;
+const aspect = 2; // Default
 const near = 0.1;
 const far = 5;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
@@ -37,6 +37,18 @@ function makeInstance(geometry, color, x) {
   return cube;
 }
 
+function resizeRendererToDisplaySize(renderer) {
+  const canvas = renderer.domElement;
+  const needsResize =
+    canvas.clientWidth !== canvas.width ||
+    canvas.clientHeight !== canvas.height;
+
+  if (needsResize)
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+
+  return needsResize;
+}
+
 const cubes = [
   makeInstance(geometry, 0x44aa88, 0),
   makeInstance(geometry, 0x8844aa, 2),
@@ -46,8 +58,10 @@ const cubes = [
 function render(time) {
   time /= 1000;
 
-  camera.aspect = canvas.clientWidth / canvas.clientHeight;
-  camera.updateProjectionMatrix();
+  if (resizeRendererToDisplaySize(renderer)) {
+    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+    camera.updateProjectionMatrix();
+  }
 
   cubes.forEach((cube, index) => {
     const speed = 1 + index * 0.1;
