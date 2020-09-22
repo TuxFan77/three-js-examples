@@ -46,6 +46,9 @@ const cubes = [
 function render(time) {
   time /= 1000;
 
+  camera.aspect = canvas.clientWidth / canvas.clientHeight;
+  camera.updateProjectionMatrix();
+
   cubes.forEach((cube, index) => {
     const speed = 1 + index * 0.1;
     const rotation = time * speed;
