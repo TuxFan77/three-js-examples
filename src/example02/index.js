@@ -3,7 +3,7 @@
  * https://threejsfundamentals.org/threejs/lessons/threejs-fundamentals.html
  */
 
-import "../threejs.scss";
+import "./styles.scss";
 import * as THREE from "three";
 
 const canvas = document.querySelector("#main");

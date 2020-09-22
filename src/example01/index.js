@@ -3,7 +3,7 @@
  * https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene
  */
 
-import "../threejs.scss";
+import "./styles.scss";
 import * as THREE from "three";
 
 const scene = new THREE.Scene();
