@@ -39,14 +39,14 @@ function makeInstance(geometry, color, x) {
 
 function resizeRendererToDisplaySize(renderer) {
   const canvas = renderer.domElement;
-  const needsResize =
-    canvas.clientWidth !== canvas.width ||
-    canvas.clientHeight !== canvas.height;
-
-  if (needsResize)
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
-
-  return needsResize;
+  const pixelRatio = window.devicePixelRatio;
+  const width = (canvas.clientWidth * pixelRatio) | 0;
+  const height = (canvas.clientHeight * pixelRatio) | 0;
+  const needResize = canvas.width !== width || canvas.height !== height;
+  if (needResize) {
+    renderer.setSize(width, height, false);
+  }
+  return needResize;
 }
 
 const cubes = [
