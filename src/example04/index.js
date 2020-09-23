@@ -47,6 +47,19 @@ function addObject(x, y, obj) {
   objects.push(obj);
 }
 
+function createMaterial() {
+  const material = new THREE.MeshPhongMaterial({
+    side: THREE.DoubleSide,
+  });
+
+  const hue = Math.random();
+  const saturation = 1;
+  const luminance = 0.5;
+  material.color.setHSL(hue, saturation, luminance);
+
+  return material;
+}
+
 function resizeRendererToDisplaySize(renderer) {
   const canvas = renderer.domElement;
   const pixelRatio = window.devicePixelRatio;
