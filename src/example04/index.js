@@ -38,6 +38,15 @@ function makeInstance(geometry, color, x) {
   return cube;
 }
 
+const objects = [];
+const spread = 15;
+function addObject(x, y, obj) {
+  obj.position.x = x * spread;
+  obj.position.y = y * spread;
+  scene.add(obj);
+  objects.push(obj);
+}
+
 function resizeRendererToDisplaySize(renderer) {
   const canvas = renderer.domElement;
   const pixelRatio = window.devicePixelRatio;
