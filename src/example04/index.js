@@ -1,6 +1,6 @@
 /*
  * Tutorial from:
- * https://threejsfundamentals.org/threejs/lessons/threejs-responsive.html
+ * https://threejsfundamentals.org/threejs/lessons/threejs-primitives.html
  */
 
 import "./styles.scss";
@@ -9,14 +9,15 @@ import * as THREE from "three";
 const canvas = document.querySelector("#main");
 const renderer = new THREE.WebGLRenderer({ canvas });
 
-const fov = 75;
+const fov = 40;
 const aspect = 2; // Default
 const near = 0.1;
-const far = 5;
+const far = 1000;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-camera.position.z = 3;
+camera.position.z = 120;
 
 const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xaaaaaa);
 
 const color = 0xffffff;
 const intensity = 1;
