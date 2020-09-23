@@ -8,6 +8,11 @@ import * as THREE from "three";
 
 const canvas = document.querySelector("#main");
 const renderer = new THREE.WebGLRenderer({ canvas });
+const objects = [];
+const spread = 15;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xaaaaaa);
 
 const fov = 40;
 const aspect = 2; // Default
@@ -16,14 +21,21 @@ const far = 1000;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 camera.position.z = 120;
 
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xaaaaaa);
+{
+  const color = 0xffffff;
+  const intensity = 1;
+  const light = new THREE.DirectionalLight(color, intensity);
+  light.position.set(-1, 2, 4);
+  scene.add(light);
+}
 
-const color = 0xffffff;
-const intensity = 1;
-const light = new THREE.DirectionalLight(color, intensity);
-light.position.set(-1, 2, 4);
-scene.add(light);
+{
+  const color = 0xffffff;
+  const intensity = 1;
+  const light = new THREE.DirectionalLight(color, intensity);
+  light.position.set(-1, -2, 4);
+  scene.add(light);
+}
 
 const boxWidth = 1;
 const boxHeight = 1;
@@ -38,8 +50,6 @@ function makeInstance(geometry, color, x) {
   return cube;
 }
 
-const objects = [];
-const spread = 15;
 function addObject(x, y, obj) {
   obj.position.x = x * spread;
   obj.position.y = y * spread;
@@ -58,6 +68,11 @@ function createMaterial() {
   material.color.setHSL(hue, saturation, luminance);
 
   return material;
+}
+
+function addSolidGeometry(x, y, geometry) {
+  const mesh = new THREE.Mesh(geometry, createMaterial());
+  addObject(x, y, mesh);
 }
 
 function resizeRendererToDisplaySize(renderer) {
